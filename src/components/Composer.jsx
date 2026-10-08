@@ -1,12 +1,40 @@
+import { useState } from "react";
+
 export default function Composer() {
+  const [draft, setDraft] = useState("");
+
+  function send() {
+    const text = draft.trim();
+    if (text === "") return;
+    console.log("Send:", text);
+    setDraft("");
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Submit event:", e.type);
+    send();
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+    if (e.key === "Escape") {
+      setDraft("");
+    }
   }
 
   return (
     <form className="composer" onSubmit={handleSubmit}>
-      <textarea name="draft" rows={2} placeholder="Type a message..." />
+      <textarea
+        name="draft"
+        rows={2}
+        placeholder="Type a message..."
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
       <button type="submit">Send</button>
     </form>
   );
