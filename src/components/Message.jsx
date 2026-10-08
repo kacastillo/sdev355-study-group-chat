@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function Message({ message, isPinned, onReact, onPin }) {
   const [showTime, setShowTime] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
 
   return (
     <li
