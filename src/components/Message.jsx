@@ -3,8 +3,12 @@ import { useState } from "react";
 export default function Message({ message, isPinned, onReact, onPin }) {
   const [showTime, setShowTime] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
 
+  function handlePinClick(e) {
+    e.stopPropagation();
+    onPin(message.id);
+  }
+  
   return (
     <li
       className={isPinned ? "message pinned" : "message"}
